@@ -1,26 +1,23 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version Change: 0.0.0 → 1.0.0
-Rationale: Initial constitution creation for Demo-Speckit project
+Version Change: 1.0.0 → 1.1.0
+Rationale: 擴充模組化架構原則，新增分層架構指導方針
 
 Modified Principles:
-- All principles are newly defined (initial version)
+- 原則六：新增分層架構要求 (UI層、控制層、服務層、資料存取層、工具層)
 
 Added Sections:
-- 核心原則 (7 principles)
-- 技術規範
-- 開發流程
-- 治理規則
+- 無
 
 Templates Status:
-- ✅ plan-template.md: Compatible (Constitution Check section will validate against new principles)
-- ✅ spec-template.md: Compatible (User scenarios and requirements align with testing principles)
-- ✅ tasks-template.md: Compatible (Task organization supports modular development)
+- ✅ plan-template.md: 需更新專案結構範例以反映分層架構
+- ✅ spec-template.md: Compatible (無影響)
+- ✅ tasks-template.md: 任務拆分應考慮各層次的實作順序
 
 Follow-up Actions:
-- None - all placeholders filled
-- Constitution ready for use
+- 建議更新 plan-template.md 的專案結構範例
+- 新專案應採用分層架構組織程式碼
 -->
 
 # Demo-Speckit 專案憲法
@@ -90,9 +87,15 @@ Follow-up Actions:
 - 每個模組的程式碼行數不超過 500 行,超過須拆分
 - 類別與函數遵循單一責任原則 (SRP): 一個類別/函數只做一件事
 - 模組之間的互動遵循 GOF 設計模式 (如工廠、策略、觀察者等)
-- 資料夾結構反映功能模組,例如: `features/auth/`、`features/dashboard/`
+- 資料夾結構反映功能模組,例如: `services/auth/`、`services/dashboard/`
+- 依需求複雜度分層架構,包含但不限於:
+  - **UI 層 (Presentation Layer)**: 元件、頁面、視覺呈現
+  - **控制層 (Controller/API Layer)**: 路由處理、請求驗證、回應格式化
+  - **服務層 (Service Layer)**: 業務邏輯、流程編排、跨模組協調
+  - **資料存取層 (Data Access Layer)**: ORM 模型、資料庫查詢、快取策略
+  - **工具層 (Utility Layer)**: 共用函式、常數定義、型別定義
 
-**理由**: 模組化與 SRP 提升程式碼可讀性、可測試性與可維護性。小型模組易於理解、修改與重用,降低系統複雜度。
+**理由**: 模組化與 SRP 提升程式碼可讀性、可測試性與可維護性。小型模組易於理解、修改與重用,降低系統複雜度。分層架構確保關注點分離 (Separation of Concerns),使每一層專注於特定職責,便於測試、替換與擴展。
 
 ### 七、技術棧一致性
 
@@ -176,4 +179,4 @@ Follow-up Actions:
 - 若違反原則必須提供充分理由並記錄於 Complexity Tracking 段落
 - 定期審查專案是否持續符合憲法要求 (建議每季一次)
 
-**版本**: 1.0.0 | **批准日期**: 2025-12-06 | **最後修訂**: 2025-12-06
+**版本**: 1.1.0 | **批准日期**: 2025-12-06 | **最後修訂**: 2025-12-09

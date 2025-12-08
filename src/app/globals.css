@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  /* 粉彩色系主題設定 */
+
+  /* 主色 - 粉藍/粉紫 */
+  --color-primary: oklch(0.75 0.12 280);
+  --color-primary-foreground: oklch(0.98 0 0);
+
+  /* 次要色 - 粉紅/粉橘 */
+  --color-secondary: oklch(0.85 0.08 30);
+  --color-secondary-foreground: oklch(0.2 0 0);
+
+  /* 強調色 - 粉綠 (完成狀態) */
+  --color-accent: oklch(0.82 0.1 150);
+  --color-accent-foreground: oklch(0.2 0 0);
+
+  /* 破壞性顏色 - 粉紅 (刪除) */
+  --color-destructive: oklch(0.75 0.15 10);
+  --color-destructive-foreground: oklch(0.98 0 0);
+
+  /* 背景色 - 極淺的粉色/米白色 */
+  --color-background: oklch(0.98 0.01 50);
+  --color-foreground: oklch(0.2 0 0);
+
+  /* 卡片 */
+  --color-card: oklch(0.99 0.005 50);
+  --color-card-foreground: oklch(0.2 0 0);
+
+  /* Popover */
+  --color-popover: oklch(0.99 0.005 50);
+  --color-popover-foreground: oklch(0.2 0 0);
+
+  /* 邊框 */
+  --color-border: oklch(0.88 0.02 280);
+  --color-input: oklch(0.88 0.02 280);
+
+  /* 環形顏色 */
+  --color-ring: oklch(0.75 0.12 280);
+
+  /* 靜音 */
+  --color-muted: oklch(0.92 0.01 50);
+  --color-muted-foreground: oklch(0.5 0 0);
+
+  /* 圓角 */
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}

@@ -1,6 +1,6 @@
 "use server";
 
-import { goalRepository } from "@/data/repositories/goal-repository";
+import { goalRepository } from "@/model/repositories/goal-repository";
 import { CreateGoalInput } from "@/types/goal";
 import { revalidatePath } from "next/cache";
 

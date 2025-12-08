@@ -21,7 +21,7 @@ import {
 import { CalendarIcon, Plus } from "lucide-react";
 import { format } from "date-fns";
 import { zhTW } from "date-fns/locale";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { validateCreateGoal } from "@/utils/validation";
 import { createGoal } from "@/services/goals/goal-service";
 

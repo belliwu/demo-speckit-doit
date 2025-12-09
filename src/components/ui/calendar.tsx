@@ -1,69 +1,78 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import * as React from "react";
 import { DayPicker } from "react-day-picker";
 import { zhTW } from "date-fns/locale";
 
 import { cn } from "@/utils/utils";
-import { buttonVariants } from "@/components/ui/button";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({
   className,
-  classNames,
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
   return (
     <DayPicker
       locale={zhTW}
+      weekStartsOn={1} // 以星期一為一週開始
       showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
+      // 外框大小與卡片感
+      className={cn(
+        "rounded-2xl border bg-card p-4 shadow-lg text-base",
+        className
+      )}
       classNames={{
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-        month: "space-y-4",
-        caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "text-sm font-medium",
-        nav: "space-x-1 flex items-center",
-        nav_button: cn(
-          buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
-        ),
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
-        table: "w-full border-collapse space-y-1",
-        head_row: "flex",
+        // 只調整排版間距，不動 table 結構
+        months: "flex flex-col space-y-4",
+        month: "space-y-2",
+
+        // 標題列（2025年12月）
+        caption: "flex items-center justify-center relative mb-2",
+        caption_label: "text-base font-semibold",
+
+        // 上一月 / 下一月 按鈕
+        nav: "flex items-center gap-1",
+        nav_button:
+          "inline-flex h-8 w-8 items-center justify-center rounded-full border border-input bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+        nav_button_previous: "absolute left-2",
+        nav_button_next: "absolute right-2",
+
+        // ⭐ 關鍵：保留 table 佈局，只加上細部樣式，完全不改 display
+        table: "border-collapse",
+        head_row: "", // 讓 <tr> 維持 table-row
         head_cell:
-          "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem] flex items-center justify-center",
-        row: "flex w-full mt-2",
-        cell: cn(
-          "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
-          props.mode === "range"
-            ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
-            : "[&:has([aria-selected])]:rounded-md"
-        ),
-        day: cn(
-          buttonVariants({ variant: "ghost" }),
-          "h-8 w-8 p-0 font-normal aria-selected:opacity-100"
-        ),
-        day_range_start: "day-range-start",
-        day_range_end: "day-range-end",
+          "pb-1 text-xs text-muted-foreground text-center font-medium tracking-wide",
+
+        row: "", // 讓 <tr> 維持 table-row
+        cell: "p-0 text-center align-middle",
+
+        // 日期按鈕：圓形、hover 有背景色
+        day:
+          "mx-auto h-8 w-8 rounded-full text-sm " +
+          "hover:bg-accent hover:text-accent-foreground " +
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+
+        // 今日：加框線
+        day_today: "border border-primary",
+
+        // 已選取日期
         day_selected:
-          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-        day_today: "bg-accent text-accent-foreground",
-        day_outside:
-          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
+          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
+
+        // 月外日期 / disabled 狀態
+        day_outside: "text-muted-foreground opacity-50",
         day_disabled: "text-muted-foreground opacity-50",
-        day_range_middle:
-          "aria-selected:bg-accent aria-selected:text-accent-foreground",
+
+        // 隱藏的日期
         day_hidden: "invisible",
-        ...classNames,
       }}
       {...props}
     />
   );
 }
+
 Calendar.displayName = "Calendar";
 
 export { Calendar };
